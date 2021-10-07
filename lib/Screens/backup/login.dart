@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'google_icons.dart';
+import 'package:flutter_application_1/google_icons.dart';
 
-class loginError extends StatefulWidget {
-  const loginError({Key? key}) : super(key: key);
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  _loginErrorState createState() => _loginErrorState();
+  _LoginState createState() => _LoginState();
 }
 
-class _loginErrorState extends State<loginError> {
+class _LoginState extends State<Login> {
   //add controller
   TextEditingController _userController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -16,7 +16,7 @@ class _loginErrorState extends State<loginError> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF4378DB),
+      backgroundColor: Colors.white,
       body: ListView(
         children: [
           Column(
@@ -24,6 +24,7 @@ class _loginErrorState extends State<loginError> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -35,7 +36,7 @@ class _loginErrorState extends State<loginError> {
                     ),
                     Image(
                       height: 50,
-                      image: AssetImage("images/logo.png"),
+                      image: AssetImage("assets/images/logo.png"),
                     ),
                   ],
                 ),
@@ -44,14 +45,14 @@ class _loginErrorState extends State<loginError> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Padding(
-                    padding: const EdgeInsets.only(top: 80, bottom: 30),
+                    padding: const EdgeInsets.only(top: 5, bottom: 30),
                     child: Text(
                       'Masuk Akun',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                        color: Color(0xFF1D7599),
                       ),
                     ),
                   ),
@@ -119,7 +120,7 @@ class _loginErrorState extends State<loginError> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 20),
+                                horizontal: 20, vertical: 10),
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
@@ -165,12 +166,17 @@ class _loginErrorState extends State<loginError> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 5, bottom: 20),
-                child: Text(
-                  'Lupa kata sandi?',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    color: Colors.white,
+                padding: const EdgeInsets.only(top: 5, bottom: 10),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/ForgotPassword');
+                  },
+                  child: Text(
+                    'Lupa kata sandi?',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      color: Colors.black,
+                    ),
                   ),
                 ),
               ),
@@ -179,7 +185,7 @@ class _loginErrorState extends State<loginError> {
                 children: [
                   Image(
                     width: 120,
-                    image: AssetImage('images/thick-line.png'),
+                    image: AssetImage('assets/images/thick-line.png'),
                   ),
                   SizedBox(
                     width: 20,
@@ -194,7 +200,7 @@ class _loginErrorState extends State<loginError> {
                   ),
                   Image(
                     width: 120,
-                    image: AssetImage('images/thick-line.png'),
+                    image: AssetImage('assets/images/thick-line.png'),
                   ),
                 ],
               ),
@@ -221,7 +227,7 @@ class _loginErrorState extends State<loginError> {
                           primary: Colors.white,
                           onPrimary: Colors.black,
                           onSurface: Colors.blue,
-                          shadowColor: Colors.yellow,
+                          shadowColor: Colors.black,
                           minimumSize: Size(0, 50),
                           alignment: Alignment.centerLeft,
                           animationDuration: Duration(
@@ -229,6 +235,9 @@ class _loginErrorState extends State<loginError> {
                                   200), //Durasi tombolnya ke angkat pas di klik
                           elevation: 2,
                           shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Color(0xFF7583CA),
+                            ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(10.0),
                             ),
@@ -282,6 +291,9 @@ class _loginErrorState extends State<loginError> {
                                   200), //Durasi tombolnya ke angkat pas di klik
                           elevation: 2,
                           shape: RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Color(0xFF7583CA),
+                            ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(10.0),
                             ),
@@ -292,8 +304,14 @@ class _loginErrorState extends State<loginError> {
                   ),
                 ],
               ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Image(
+                  image: AssetImage('assets/images/bottom.png'),
+                ),
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

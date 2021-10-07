@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/validation.dart';
+import 'package:flutter_application_1/screens/auth/validation.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Color(0xFF4378DB),
+        backgroundColor: Colors.white,
         body: Container(
           margin: EdgeInsets.fromLTRB(16.0, 40.0, 16.0, 0),
           child: Column(
@@ -40,7 +40,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                     ),
                     Image(
                       height: 50,
-                      image: AssetImage("images/logo.png"),
+                      image: AssetImage("assets/images/logo.png"),
                     ),
                   ],
                 ),
@@ -102,7 +102,7 @@ class _ForgotPasswordState extends State<ForgotPasswordPage> {
                     ),
                     Image(
                       height: 300,
-                      image: AssetImage("images/Saly-11.png"),
+                      image: AssetImage("assets/images/Group12.png"),
                     ),
                   ],
                 ),

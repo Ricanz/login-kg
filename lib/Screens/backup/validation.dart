@@ -28,7 +28,7 @@ class _ValidationState extends State<Validation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF4378DB),
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Row(
@@ -37,7 +37,7 @@ class _ValidationState extends State<Validation> {
               Padding(
                 padding: const EdgeInsets.only(top: 38, right: 10, bottom: 40),
                 child: Image(
-                  image: AssetImage('assets/logo-1.png'),
+                  image: AssetImage('assets/images/logo1.png'),
                   height: 42,
                 ),
               ),
@@ -88,30 +88,19 @@ class _ValidationState extends State<Validation> {
               ),
             ),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(
-                      left: 35, top: 0, right: 35, bottom: 14),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/changePassword');
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.orangeAccent,
-                    ),
-                    child: Text(
-                      'Kirim',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
-                  ),
-                ),
+          ElevatedButton(
+            child: Text("Kirim"),
+            style: ElevatedButton.styleFrom(
+              fixedSize: Size(320, 50),
+              primary: Colors.orange[400],
+              onPrimary: Colors.black,
+              shape: new RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(10.0),
               ),
-            ],
+            ),
+            onPressed: () {
+              Navigator.pushNamed(context, '/');
+            },
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -119,7 +108,7 @@ class _ValidationState extends State<Validation> {
               Padding(
                 padding: const EdgeInsets.only(top: 8, right: 10, bottom: 40),
                 child: Image(
-                  image: AssetImage('assets/Saly-38.png'),
+                  image: AssetImage('assets/images/Group10.png'),
                   height: 250,
                 ),
               ),

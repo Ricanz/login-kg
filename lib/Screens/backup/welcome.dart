@@ -1,39 +1,52 @@
 import 'package:flutter/material.dart';
-import 'register.dart';
-import 'login.dart';
-import 'package:flutter/src/material/colors.dart';
+import 'package:flutter_application_1/screens/auth/login.dart';
+import 'package:flutter_application_1/screens/auth/register.dart';
 
-class SplashPage extends StatelessWidget {
+class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF4378DB),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(
-              height: 100,
-              image: AssetImage("images/logo.png"),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 100, 0, 0),
+              child: Image(
+                width: 250,
+                image: AssetImage("assets/images/logo_orens.png"),
+              ),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 80),
             SizedBox(
               width: 300,
               child: Text(
-                "Selamat datang para mahasiswa Kampus Gratis yang siap menjadi penerus bangsa Indonesia!",
+                "Selamat Datang",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF2995B2),
+                  fontSize: 28,
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            SizedBox(
+              width: 280,
+              child: Text(
+                "Para mahasiswa Kampus Gratis yang siap menjadi penerus bangsa Indonesia!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
                   fontSize: 18,
                 ),
               ),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 80),
             ElevatedButton(
               child: Text("Masuk"),
               style: ElevatedButton.styleFrom(
                 fixedSize: Size(220, 50),
-                primary: Colors.orange[400],
+                primary: Color(0xFFFFA726),
                 onPrimary: Colors.black,
                 shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(10.0),
@@ -61,6 +74,15 @@ class SplashPage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/register');
               },
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Image(
+                  width: 300,
+                  image: AssetImage("assets/images/memphis1.png"),
+                ),
+              ),
             ),
           ],
         ),

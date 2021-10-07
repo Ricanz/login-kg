@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'google_icons.dart';
+import 'package:flutter_application_1/google_icons.dart';
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class loginError extends StatefulWidget {
+  const loginError({Key? key}) : super(key: key);
 
   @override
-  _LoginState createState() => _LoginState();
+  _loginErrorState createState() => _loginErrorState();
 }
 
-class _LoginState extends State<Login> {
+class _loginErrorState extends State<loginError> {
   //add controller
   TextEditingController _userController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
@@ -16,7 +16,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xFF4378DB),
       body: ListView(
         children: [
           Column(
@@ -24,7 +24,6 @@ class _LoginState extends State<Login> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -45,14 +44,14 @@ class _LoginState extends State<Login> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Padding(
-                    padding: const EdgeInsets.only(top: 5, bottom: 30),
+                    padding: const EdgeInsets.only(top: 80, bottom: 30),
                     child: Text(
                       'Masuk Akun',
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF1D7599),
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -120,7 +119,7 @@ class _LoginState extends State<Login> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 10),
+                                horizontal: 20, vertical: 20),
                             child: ElevatedButton(
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
@@ -166,17 +165,12 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 5, bottom: 10),
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/ForgotPassword');
-                  },
-                  child: Text(
-                    'Lupa kata sandi?',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      color: Colors.black,
-                    ),
+                padding: const EdgeInsets.only(top: 5, bottom: 20),
+                child: Text(
+                  'Lupa kata sandi?',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -227,7 +221,7 @@ class _LoginState extends State<Login> {
                           primary: Colors.white,
                           onPrimary: Colors.black,
                           onSurface: Colors.blue,
-                          shadowColor: Colors.black,
+                          shadowColor: Colors.yellow,
                           minimumSize: Size(0, 50),
                           alignment: Alignment.centerLeft,
                           animationDuration: Duration(
@@ -235,9 +229,6 @@ class _LoginState extends State<Login> {
                                   200), //Durasi tombolnya ke angkat pas di klik
                           elevation: 2,
                           shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xFF7583CA),
-                            ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(10.0),
                             ),
@@ -291,9 +282,6 @@ class _LoginState extends State<Login> {
                                   200), //Durasi tombolnya ke angkat pas di klik
                           elevation: 2,
                           shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                              color: Color(0xFF7583CA),
-                            ),
                             borderRadius: BorderRadius.all(
                               Radius.circular(10.0),
                             ),
@@ -304,14 +292,8 @@ class _LoginState extends State<Login> {
                   ),
                 ],
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Image(
-                  image: AssetImage('images/bottom.png'),
-                ),
-              ),
             ],
-          ),
+          )
         ],
       ),
     );
