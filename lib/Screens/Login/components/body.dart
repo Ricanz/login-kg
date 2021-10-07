@@ -1,17 +1,22 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:login_app/Screens/Login/components/background.dart';
-import 'package:login_app/Screens/Login/components/header_login.dart';
-import 'package:login_app/Screens/Login/components/icon_btn.dart';
-import 'package:login_app/Screens/Login/components/text_field.dart';
+import 'package:login_app/components/background.dart';
+import 'package:login_app/components/header_login.dart';
+import 'package:login_app/components/icon_btn.dart';
 import 'package:login_app/components/primary_button.dart';
+import 'package:login_app/components/text_field.dart';
 import 'package:login_app/constants.dart';
 
 class Body extends StatelessWidget {
-  const Body({
+  Body({
     Key? key,
   }) : super(key: key);
+
+  //add controller
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,19 +47,28 @@ class Body extends StatelessWidget {
               ],
             ),
             Form(
+              key: _formKey,
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 40),
+                      padding: const EdgeInsets.only(top: 20),
                       child: LoginTextField(
                         focus: false,
                         correct: true,
                         obscure: false,
                         text: 'Nama Pengguna',
-                        icon: Icons.person,
+                        icon: Icons.person, 
+                        controller: _userController,
+                        validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Nama Pengguna tidak boleh kosong';
+                            }
+                            return null;
+                        }, 
+                        keyboardType: TextInputType.text,
                       ),
                     ),
                     Padding(
@@ -66,11 +80,26 @@ class Body extends StatelessWidget {
                         obscure: true,
                         text: 'Kata Sandi',
                         icon: Icons.lock,
+                        controller: _passwordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Kata Sandi tidak boleh kosong';
+                          }
+                          return null;
+                        }, 
+                        keyboardType: TextInputType.visiblePassword,
                       ),
                     ),
                     PrimaryButton(
                       text: 'Masuk',
-                      press: () {},
+                      press:() {
+                        if (_formKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Processing Data')),
+                          );
+                        }
+                      },
                       color: kOrange,
                       textColor: Colors.black,
                       width: size.width,
