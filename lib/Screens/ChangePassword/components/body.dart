@@ -59,8 +59,8 @@ class Body extends StatelessWidget {
                       padding: const EdgeInsets.only(top: 40),
                       child: LoginTextField(
                         focus: false,
-                        correct: true,
-                        obscure: false,
+                        correct: false,
+                        obscure: true,
                         text: 'Kata Sandi Baru',
                         icon: Icons.lock,
                       ),

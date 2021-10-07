@@ -23,7 +23,7 @@ class Body extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.only(bottom: 10),
         child: Text(
-          'Lupa Password',
+          'Lupa Kata Sandi',
           style: TextStyle(
             fontSize: 26,
             fontWeight: FontWeight.bold,
@@ -50,7 +50,7 @@ class Body extends StatelessWidget {
                 focus: false,
                 correct: true,
                 obscure: false,
-                text: 'Nama Pengguna',
+                text: 'Email',
                 icon: Icons.email,
               ),
               Padding(

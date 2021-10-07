@@ -48,7 +48,7 @@ class Body extends StatelessWidget {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 40),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       child: LoginTextField(
                         focus: false,
                         correct: true,
@@ -58,7 +58,7 @@ class Body extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 40),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       child: LoginTextField(
                         focus: false,
                         correct: true,
@@ -68,7 +68,7 @@ class Body extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       // ignore: prefer_const_constructors
                       child: LoginTextField(
                         focus: false,
@@ -79,7 +79,7 @@ class Body extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      padding: const EdgeInsets.symmetric(vertical: 15),
                       // ignore: prefer_const_constructors
                       child: LoginTextField(
                         focus: false,
