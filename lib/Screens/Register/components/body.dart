@@ -4,6 +4,7 @@ import 'package:login_app/components/header_login.dart';
 import 'package:login_app/components/primary_button.dart';
 import 'package:login_app/components/text_field.dart';
 import 'package:login_app/constants.dart';
+import 'package:regexpattern/regexpattern.dart';
 
 class Body extends StatelessWidget {
   Body({
@@ -20,6 +21,7 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Background(
@@ -34,6 +36,7 @@ class Body extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //TITLE HALAMAN
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20),
                   child: Text(
@@ -54,6 +57,8 @@ class Body extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   children: [
+                    
+                    //NAMA PENGGUNA
                     Padding(
                       padding: const EdgeInsets.only(top: 20),
                       child: LoginTextField(
@@ -64,14 +69,25 @@ class Body extends StatelessWidget {
                         icon: Icons.person,
                         controller: _userController,
                         validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Nama Pengguna tidak boleh kosong';
-                            }
+                          String username = _userController.text;
+
+                          if (username == Null || username.isEmpty) {
+                            return 'Nama Pengguna tidak boleh kosong!';
+                          } else if (username.length < 8) {
+                            return 'Nama Pengguna minimal 8 karakter!';
+                          } else if (username.length > 30) {
+                            return 'Nama Pengguna maximal 30 karakter!';
+                          } else if (!username.isUsername()) {
+                            return 'Nama Pengguna tidak valid!';
+                          } else {
                             return null;
-                        }, 
+                          }
+                        },
                         keyboardType: TextInputType.text,
                       ),
                     ),
+
+                    //E-MAIL
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: LoginTextField(
@@ -82,52 +98,73 @@ class Body extends StatelessWidget {
                         icon: Icons.email,
                         controller: _emailController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Email tidak boleh kosong';
+                          String email = _emailController.text;
+
+                          if (email == Null || email.isEmpty) {
+                            return 'E-mail tidak boleh kosong';
+                          } else if (!email.isEmail()){
+                            return 'E-mail tidak valid! ';
+                          } else {
+                            return null;
                           }
-                          return null;
                         },
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
+
+                    //KATA SANDI
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 0),
                       child: LoginTextField(
                         focus: false,
                         correct: true,
-                        obscure: false,
+                        obscure: true,
                         text: 'Kata Sandi',
                         icon: Icons.lock,
                         controller: _passwordController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Kata Sandi tidak boleh kosong';
+                          String password = _passwordController.text;
+
+                          if (password == Null || password.isEmpty) {
+                            return 'Kata Sandi tidak boleh kosong!';
+                          } else if (password.length < 8) {
+                            return 'Kata Sandi minimal 8 karakter atau lebih!';
+                          } else if (!password.isPasswordNormal1()) { //BELUM FIX, TENTUKAN STANDARISASI DULU (EASY, HARD, DLL ?)
+                            return 'Kekuatan Kata Sandi lemah!';
+                          } else {
+                            return null;
                           }
-                          return null;
-                        }, 
+                        },
                         keyboardType: TextInputType.visiblePassword,
                       ),
                     ),
+
+                    //ULANGI KATA SANDI
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: LoginTextField(
                         focus: false,
                         correct: true,
-                        obscure: false,
+                        obscure: true,
                         text: 'Ulangi Kata Sandi',
                         icon: Icons.lock,
                         controller: _repeatpasswordController,
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          String repeatPassword = _repeatpasswordController.text;
+
+                          if (repeatPassword == Null || repeatPassword.isEmpty) {
                             return 'Ulangi Kata Sandi tidak boleh kosong';
                           } else if (value != _passwordController.text) {
                             return 'Ulangi Kata Sandi tidak sama';
+                          } else {
+                            return null;
                           }
-                          return null;
-                        }, 
+                        },
                         keyboardType: TextInputType.visiblePassword,
                       ),
                     ),
+
+                    //TOMBOL DAFTAR
                     PrimaryButton(
                       text: 'Daftar',
                       press:() {
