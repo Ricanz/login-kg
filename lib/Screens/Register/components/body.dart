@@ -18,8 +18,6 @@ class Body extends StatelessWidget {
   
   final _formKey = GlobalKey<FormState>();
 
-  RegExp uidvalidation = RegExp(r"^[a-z0-9_]{1,24}$", caseSensitive: false);
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
