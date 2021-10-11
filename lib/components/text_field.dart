@@ -1,9 +1,7 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:flutter/material.dart';
 
-class LoginTextField extends StatelessWidget {
-  const LoginTextField({
+class PrimaryTextField extends StatelessWidget {
+  const PrimaryTextField({
     Key? key,
     required this.focus,
     required this.correct,
@@ -12,14 +10,12 @@ class LoginTextField extends StatelessWidget {
     required this.icon,
     required this.keyboardType,
     required this.controller,
-    required this.validator, 
+    required this.validator,
   }) : super(key: key);
   final bool focus, correct, obscure;
   final String text;
-  final icon;
-  final keyboardType;
-  final controller;
-  final validator;
+  final icon, keyboardType;
+  final controller, validator;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -43,3 +39,32 @@ class LoginTextField extends StatelessWidget {
     );
   }
 }
+
+// class PrimaryTextField extends StatelessWidget {
+//   const PrimaryTextField({
+//     Key? key,
+//     required this.focus,
+//     required this.correct,
+//     required this.text,
+//     this.icon,
+//   }) : super(key: key);
+//   final bool focus, correct;
+//   final String text;
+//   final icon;
+//   @override
+//   Widget build(BuildContext context) {
+//     Size size = MediaQuery.of(context).size;
+//     return TextFormField(
+//       autofocus: focus,
+//       autocorrect: correct,
+//       keyboardType: TextInputType.text,
+//       decoration: InputDecoration(
+//         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+//         fillColor: Colors.white,
+//         filled: true,
+//         hintText: text,
+//         hintStyle: TextStyle(fontFamily: 'Montserrat'),
+//       ),
+//     );
+//   }
+// }

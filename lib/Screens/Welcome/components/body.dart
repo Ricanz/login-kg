@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_app/Screens/Welcome/components/background.dart';
+import 'package:login_app/components/background.dart';
 import 'package:login_app/components/primary_button.dart';
 import 'package:login_app/constants.dart';
 
@@ -10,7 +10,7 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
-    return Background(
+    return BottomRightBackground(
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

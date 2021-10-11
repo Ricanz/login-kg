@@ -1,41 +1,40 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:login_app/components/background.dart';
-import 'package:login_app/components/header_login.dart';
-import 'package:login_app/components/primary_button.dart';
+import 'package:login_app/components/header_1.dart';
 import 'package:login_app/components/text_field.dart';
+import 'package:login_app/components/primary_button.dart';
 import 'package:login_app/constants.dart';
-import 'package:regexpattern/regexpattern.dart';
+import 'package:regexpattern/src/regex_extension.dart';
 
 class Body extends StatelessWidget {
   Body({
     Key? key,
   }) : super(key: key);
 
-  //add controller
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _repeatpasswordController = TextEditingController();
-  
+  final TextEditingController _repeatPasswordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      child: Background(
+      child: MainBackground(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              // padding: EdgeInsets.symmetric(horizontal: 20, vertical: size.height * 0.1),
               child: HeaderLogin(),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+
                 //TITLE HALAMAN
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20),
@@ -48,6 +47,7 @@ class Body extends StatelessWidget {
                     ),
                   ),
                 ),
+
               ],
             ),
             Form(
@@ -57,28 +57,28 @@ class Body extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   children: [
-                    
+
                     //NAMA PENGGUNA
                     Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: LoginTextField(
+                      padding: const EdgeInsets.only(top: 30, bottom: 10),
+                      child: PrimaryTextField(
                         focus: false,
                         correct: true,
                         obscure: false,
-                        text: 'Nama Pengguna',
                         icon: Icons.person,
+                        text: 'Nama Pengguna',
                         controller: _userController,
                         validator: (value) {
                           String username = _userController.text;
 
                           if (username == Null || username.isEmpty) {
                             return 'Nama Pengguna tidak boleh kosong!';
+                          } else if (!username.isUsername()) {
+                            return 'Nama Pengguna tidak valid!';
                           } else if (username.length < 8) {
                             return 'Nama Pengguna minimal 8 karakter!';
                           } else if (username.length > 30) {
                             return 'Nama Pengguna maximal 30 karakter!';
-                          } else if (!username.isUsername()) {
-                            return 'Nama Pengguna tidak valid!';
                           } else {
                             return null;
                           }
@@ -87,15 +87,15 @@ class Body extends StatelessWidget {
                       ),
                     ),
 
-                    //E-MAIL
+                    //EMAIL
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: LoginTextField(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: PrimaryTextField(
                         focus: false,
                         correct: true,
                         obscure: false,
-                        text: 'E-mail',
                         icon: Icons.email,
+                        text: 'Email',
                         controller: _emailController,
                         validator: (value) {
                           String email = _emailController.text;
@@ -111,16 +111,16 @@ class Body extends StatelessWidget {
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
-
+                    
                     //KATA SANDI
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 0),
-                      child: LoginTextField(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: PrimaryTextField(
                         focus: false,
                         correct: true,
                         obscure: true,
-                        text: 'Kata Sandi',
                         icon: Icons.lock,
+                        text: 'Kata Sandi',
                         controller: _passwordController,
                         validator: (value) {
                           String password = _passwordController.text;
@@ -141,16 +141,16 @@ class Body extends StatelessWidget {
 
                     //ULANGI KATA SANDI
                     Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: LoginTextField(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: PrimaryTextField(
                         focus: false,
                         correct: true,
                         obscure: true,
+                        icon: Icons.password_outlined,
                         text: 'Ulangi Kata Sandi',
-                        icon: Icons.lock,
-                        controller: _repeatpasswordController,
+                        controller: _repeatPasswordController,
                         validator: (value) {
-                          String repeatPassword = _repeatpasswordController.text;
+                          String repeatPassword = _repeatPasswordController.text;
 
                           if (repeatPassword == Null || repeatPassword.isEmpty) {
                             return 'Ulangi Kata Sandi tidak boleh kosong';
@@ -165,22 +165,27 @@ class Body extends StatelessWidget {
                     ),
 
                     //TOMBOL DAFTAR
-                    PrimaryButton(
-                      text: 'Daftar',
-                      press:() {
-                        if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Processing Data')),
-                          );
-                        }
-                      },
-                      color: kOrange,
-                      textColor: Colors.black,
-                      width: size.width,
-                      shadowColor: Colors.black,
-                      borderColor: kOrange,
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: PrimaryButton(
+                        text: 'Daftar',
+                        color: kOrange,
+                        textColor: Colors.black,
+                        width: size.width,
+                        shadowColor: Colors.black,
+                        borderColor: kOrange,
+                        press:() {
+                          if (_formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Account Created Successfully')),
+                            );
+                            Navigator.pushNamed(context, '/login');
+                          }
+                        },
+                      ),
                     ),
+                    
                   ],
                 ),
               ),

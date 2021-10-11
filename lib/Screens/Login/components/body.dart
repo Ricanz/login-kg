@@ -1,10 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:login_app/components/background.dart';
-import 'package:login_app/components/header_login.dart';
-import 'package:login_app/components/icon_btn.dart';
-import 'package:login_app/components/primary_button.dart';
+import 'package:login_app/components/header_1.dart';
+import 'package:login_app/Screens/Login/components/icon_btn.dart';
 import 'package:login_app/components/text_field.dart';
+import 'package:login_app/components/primary_button.dart';
 import 'package:login_app/constants.dart';
 
 class Body extends StatelessWidget {
@@ -12,17 +13,16 @@ class Body extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  //add controller
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  
+
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      child: Background(
+      child: MainBackground(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -33,6 +33,8 @@ class Body extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+
+                //TITLE HALAMAN
                 Padding(
                   padding: const EdgeInsets.only(bottom: 20),
                   child: Text(
@@ -44,6 +46,7 @@ class Body extends StatelessWidget {
                     ),
                   ),
                 ),
+
               ],
             ),
             Form(
@@ -53,30 +56,34 @@ class Body extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Column(
                   children: [
+
+                    //NAMA PENGGUNA
                     Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: LoginTextField(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: PrimaryTextField(
                         focus: false,
                         correct: true,
                         obscure: false,
                         text: 'Nama Pengguna',
-                        icon: Icons.person, 
+                        icon: Icons.person,
                         controller: _userController,
                         validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Nama Pengguna tidak boleh kosong';
-                            }
-                            return null;
-                        }, 
+                          if (value == null || value.isEmpty) {
+                            return 'Nama Pengguna tidak boleh kosong';
+                          }
+                          return null;
+                        },
                         keyboardType: TextInputType.text,
                       ),
                     ),
+
+                    //KATA SANDI
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       // ignore: prefer_const_constructors
-                      child: LoginTextField(
+                      child: PrimaryTextField(
                         focus: false,
-                        correct: false,
+                        correct: true,
                         obscure: true,
                         text: 'Kata Sandi',
                         icon: Icons.lock,
@@ -86,18 +93,20 @@ class Body extends StatelessWidget {
                             return 'Kata Sandi tidak boleh kosong';
                           }
                           return null;
-                        }, 
+                        },
                         keyboardType: TextInputType.visiblePassword,
                       ),
                     ),
+
+                    //TOMBOL MASUK
                     PrimaryButton(
                       text: 'Masuk',
-                      press:() {
+                      press: () {
                         if (_formKey.currentState!.validate()) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                                content: Text('Processing Data')),
+                            const SnackBar(content: Text('Login Process')),
                           );
+                          Navigator.pushNamed(context, '/');
                         }
                       },
                       color: kOrange,
@@ -106,6 +115,8 @@ class Body extends StatelessWidget {
                       shadowColor: Colors.black,
                       borderColor: kOrange,
                     ),
+
+                    //LUPA KATA SANDI
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: RichText(
@@ -124,11 +135,13 @@ class Body extends StatelessWidget {
                               ),
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  Navigator.pushNamed(context, '/');
+                                  Navigator.pushNamed(
+                                      context, '/forget-password');
                                 })
                         ],
                       )),
                     ),
+
                     // TextButton(
                     //   onPressed: () {},
                     //   child: Text(
@@ -164,6 +177,8 @@ class Body extends StatelessWidget {
                 ),
               ],
             ),
+
+            //LOGIN GOOGLE
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Row(
@@ -181,6 +196,8 @@ class Body extends StatelessWidget {
                 ],
               ),
             ),
+
+            //LOGIN FACEBOOK
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
@@ -198,6 +215,7 @@ class Body extends StatelessWidget {
                 ],
               ),
             ),
+            
           ],
         ),
       ),
