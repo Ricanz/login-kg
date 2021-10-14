@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:login_app/Screens/Welcome/welcome_screen.dart';
 import 'package:login_app/constants.dart';
 import 'package:login_app/routes.dart';
-
 import 'package:splashscreen/splashscreen.dart';
 
 void main() {

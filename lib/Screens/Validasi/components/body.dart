@@ -1,6 +1,8 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:login_app/Screens/Validasi/components/background.dart';
+// import 'package:login_app/Screens/Validasi/components/background.dart';
 import 'package:login_app/components/header_1.dart';
 import 'package:login_app/components/text_field.dart';
 import 'package:login_app/components/primary_button.dart';
@@ -20,84 +22,79 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      child: Background(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: HeaderLogin(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            child: HeaderLogin(),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
 
-                //TITLE HALAMAN
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    'Validasi',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: kBlue,
-                    ),
+              //TITLE HALAMAN
+              Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                child: Text(
+                  'Validasi',
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: kBlue,
                   ),
                 ),
+              ),
 
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+            ],
+          ),
 
-                //DESKRIPSI
-                SizedBox(
-                  width: size.width*0.6,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 50),
-                    child: Text(
-                      'Masukkan kode yang diberikan melalui E-mail anda yang terdaftar',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: kLightBlue,
-                      ),
-                    ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+
+              //DESKRIPSI
+              Container(
+                margin: const EdgeInsets.only(bottom: 50),
+                child: Text(
+                  'Masukkan kode yang diberikan melalui E-mail anda yang terdaftar',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: kLightBlue,
                   ),
                 ),
+              ),
 
-              ],
-            ),
-            Form(
+            ],
+          ),
+
+          Container(
+            child: Form(
               key: _formKey,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: Column(
                   children: [
 
-                    //KODE VALIDASI
+                    //code
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: PrimaryTextField(
                         focus: false,
-                        correct: false,
+                        correct: true,
                         obscure: true,
-                        icon: Icons.mail,
+                        icon: Icons.security,
                         text: 'Kode',
                         controller: _codeController,
                         validator: (value) {
-                          // if (value == null || value.isEmpty) {
-                          //   return 'Masukan Kode!';
-                          // }
-                          // return null;
                           String code = _codeController.text;
 
                           if (code == Null || code.isEmpty) {
                             return 'Masukan Kode!';
-                          } else if (!code.isNumeric()) {
+                          } else if (!code.isNumeric()){
                             return 'Kode berupa numerik!';
                           } else {
                             return null;
@@ -106,12 +103,17 @@ class Body extends StatelessWidget {
                         keyboardType: TextInputType.number,
                       ),
                     ),
-                    
+
                     //TOMBOL KIRIM
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: PrimaryButton(
                         text: 'Kirim',
+                        color: kOrange,
+                        textColor: Colors.black,
+                        width: size.width,
+                        shadowColor: Colors.black,
+                        borderColor: kOrange,
                         press: () {
                           if (_formKey.currentState!.validate()) {
                             ScaffoldMessenger.of(context).showSnackBar(
@@ -120,20 +122,22 @@ class Body extends StatelessWidget {
                             Navigator.pushNamed(context, '/change-password');
                           }
                         },
-                        color: kOrange,
-                        textColor: Colors.black,
-                        width: size.width,
-                        shadowColor: Colors.black,
-                        borderColor: kOrange,
                       ),
                     ),
-                    
+
                   ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+
+          Container(
+            child:Image(
+              image: AssetImage('assets/images/mid-2.png'),
+              width: size.width,
+            ),
+          ),
+        ],
       ),
     );
   }

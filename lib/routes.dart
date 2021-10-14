@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+
+import 'package:login_app/main.dart';
 import 'package:login_app/Screens/Login/login_screen.dart';
 import 'package:login_app/Screens/Register/register_screen.dart';
+import 'package:login_app/Screens/Change%20Password/change_password_screen.dart';
+import 'package:login_app/Screens/Forget%20Password/forget_password_screen.dart';
 import 'package:login_app/Screens/Validasi/forget_password_screen.dart';
-import 'package:login_app/main.dart';
 
-import 'Screens/Change Password/change_password_screen.dart';
-import 'Screens/Forget Password/forget_password_screen.dart';
+// import 'Screens/Change Password/change_password_screen.dart';
+// import 'Screens/Forget Password/forget_password_screen.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {

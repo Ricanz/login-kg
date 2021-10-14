@@ -13,20 +13,21 @@ class Body extends StatelessWidget {
   }) : super(key: key);
 
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _repeatPasswordController = TextEditingController();
+  final TextEditingController _repeatPasswordController =
+      TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
-      child: MainBackground(
+    return MainBackground(
+      child: SingleChildScrollView(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
               child: HeaderLogin(),
             ),
             Row(
@@ -34,8 +35,8 @@ class Body extends StatelessWidget {
               children: [
 
                 //TITLE HALAMAN
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 10),
                   child: Text(
                     'Ganti Kata Sandi',
                     style: TextStyle(
@@ -48,15 +49,16 @@ class Body extends StatelessWidget {
 
               ],
             ),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 
                 //DESKRIPSI
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 50),
+                Container(
+                  margin: const EdgeInsets.only(bottom: 50),
                   child: Text(
                     'Masukkan Kata Sandi Baru',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -67,89 +69,93 @@ class Body extends StatelessWidget {
 
               ],
             ),
-            Form(
-              key: _formKey,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                child: Column(
-                  children: [
 
-                    //KATA SANDI
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: PrimaryTextField(
-                        focus: false,
-                        correct: false,
-                        obscure: true,
-                        icon: Icons.lock,
-                        text: 'Kata Sandi',
-                        controller: _passwordController,
-                        validator: (value) {
-                          String password = _passwordController.text;
+            Container(
+              child: Form(
+                key: _formKey,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  child: Column(
+                    children: [
+                      //KATA SANDI
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: PrimaryTextField(
+                          focus: false,
+                          correct: false,
+                          obscure: true,
+                          icon: Icons.lock,
+                          text: 'Kata Sandi',
+                          controller: _passwordController,
+                          validator: (value) {
+                            String password = _passwordController.text;
 
-                          if (password == Null || password.isEmpty) {
-                            return 'Kata Sandi tidak boleh kosong!';
-                          } else if (password.length < 8) {
-                            return 'Kata Sandi minimal 8 karakter atau lebih!';
-                          } else if (!password.isPasswordNormal1()) { //BELUM FIX, TENTUKAN STANDARISASI DULU (EASY, HARD, DLL ?)
-                            return 'Kekuatan Kata Sandi lemah!';
-                          } else {
-                            return null;
-                          }
-                        },
-                        keyboardType: TextInputType.visiblePassword,
+                            if (password == Null || password.isEmpty) {
+                              return 'Kata Sandi tidak boleh kosong!';
+                            } else if (password.length < 8) {
+                              return 'Kata Sandi minimal 8 karakter atau lebih!';
+                            } else if (!password.isPasswordNormal1()) {
+                              //BELUM FIX, TENTUKAN STANDARISASI DULU (EASY, HARD, DLL ?)
+                              return 'Kekuatan Kata Sandi lemah!';
+                            } else {
+                              return null;
+                            }
+                          },
+                          keyboardType: TextInputType.visiblePassword,
+                        ),
                       ),
-                    ),
 
-                    //ULANGI KATA SANDI
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: PrimaryTextField(
-                        focus: false,
-                        correct: false,
-                        obscure: true,
-                        icon: Icons.password_outlined,
-                        text: 'Ulangi Kata Sandi',
-                        controller: _repeatPasswordController,
-                        validator: (value) {
-                          String repeatPassword = _repeatPasswordController.text;
+                      //ULANGI KATA SANDI
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: PrimaryTextField(
+                          focus: false,
+                          correct: false,
+                          obscure: true,
+                          icon: Icons.password_outlined,
+                          text: 'Ulangi Kata Sandi',
+                          controller: _repeatPasswordController,
+                          validator: (value) {
+                            String repeatPassword =
+                                _repeatPasswordController.text;
 
-                          if (repeatPassword == Null || repeatPassword.isEmpty) {
-                            return 'Ulangi Kata Sandi tidak boleh kosong';
-                          } else if (value != _passwordController.text) {
-                            return 'Ulangi Kata Sandi tidak sama';
-                          } else {
-                            return null;
-                          }
-                        },
-                        keyboardType: TextInputType.visiblePassword,
+                            if (repeatPassword == Null ||
+                                repeatPassword.isEmpty) {
+                              return 'Ulangi Kata Sandi tidak boleh kosong';
+                            } else if (value != _passwordController.text) {
+                              return 'Ulangi Kata Sandi tidak sama';
+                            } else {
+                              return null;
+                            }
+                          },
+                          keyboardType: TextInputType.visiblePassword,
+                        ),
                       ),
-                    ),
 
-                    //TOMBOL KIRIM
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: PrimaryButton(
-                        text: 'Kirim',
-                        color: kOrange,
-                        textColor: Colors.black,
-                        width: size.width,
-                        shadowColor: Colors.black,
-                        borderColor: kOrange,
-                        press:() {
-                          if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('Reset Successful')),
-                            );
-                            Navigator.pushNamed(context, '/login');
-                          }
-                        },
+                      //TOMBOL KIRIM
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: PrimaryButton(
+                          text: 'Kirim',
+                          color: kOrange,
+                          textColor: Colors.black,
+                          width: size.width,
+                          shadowColor: Colors.black,
+                          borderColor: kOrange,
+                          press: () {
+                            if (_formKey.currentState!.validate()) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Reset Successful')),
+                              );
+                              Navigator.pushNamed(context, '/login');
+                            }
+                          },
+                        ),
                       ),
-                    ),
-
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
