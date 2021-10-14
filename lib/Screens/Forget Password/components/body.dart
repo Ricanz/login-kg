@@ -20,53 +20,53 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SingleChildScrollView(
-      child: Background(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              child: HeaderLogin(),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            child: HeaderLogin(),
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
 
-                //TITLE HALAMAN
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    'Lupa Kata Sandi',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                      color: kBlue,
-                    ),
+              //TITLE HALAMAN
+              Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                child: Text(
+                  'Lupa Kata Sandi',
+                  style: TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: kBlue,
                   ),
                 ),
+              ),
 
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+            ],
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
 
-                //DESKRIPSI
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 50),
-                  child: Text(
-                    'Masukkan Email Yang Telah Terdaftar',
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: kLightBlue,
-                    ),
+              //DESKRIPSI
+              Container(
+                margin: const EdgeInsets.only(bottom: 50),
+                child: Text(
+                  'Masukkan Email Yang Telah Terdaftar',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                    color: kLightBlue,
                   ),
                 ),
+              ),
 
-              ],
-            ),
-            Form(
+            ],
+          ),
+          Container(
+            child: Form(
               key: _formKey,
               child: Padding(
                 padding:
@@ -124,8 +124,14 @@ class Body extends StatelessWidget {
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+           Container(
+             child:Image(
+            image: AssetImage('assets/images/mid-1.png'),
+            width: size.width,
+          ), 
+           )
+        ],
       ),
     );
   }
